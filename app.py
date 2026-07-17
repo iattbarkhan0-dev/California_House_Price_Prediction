@@ -4,10 +4,18 @@ import pickle
 st.set_page_config(page_title="California House Price Prediction",layout="centered")
 st.title("California House Price Prediction")
 st.write("Please enter the details related to house for price prediction.")
-with open("CALIFORNIA_HOUSE_PRICE1.pickle","rb") as f:
-    rf=pickle.load(f)
-with open("california_house_preprocessor.pkl","rb") as f:
-    preprocessor=pickle.load(f)
+try:
+    with open("CALIFORNIA_HOUSE_PRICE1.pickle", "rb") as f:
+        rf = pickle.load(f)
+except Exception as e:
+    st.exception(e)
+    st.stop()
+try:
+    with open("california_house_preprocessor.pkl", "rb") as f:
+        preprocessor = pickle.load(f)
+except Exception as e:
+    st.exception(e)
+    st.stop()
 longitude=st.number_input("longitude",min_value=-124.65,max_value=-114.13)
 latitude=st.number_input("latitude",min_value=32.51,max_value=42.01)
 housing_median_age=st.number_input("housing_median_age")
